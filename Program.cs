@@ -101,17 +101,19 @@ namespace Game
           status[(selection - 1) / 3, (selection - 1) % 3] = 'X';
           PossibleMoves.Remove(selection);
 
+          if (!P1IsBot) this.ShowTable();
+
           if (Wins())
           {
-            this.ShowTable();
+            if(P1IsBot) this.ShowTable();
             Console.WriteLine("Player 1 has won!\n*********************************");
             return;
           }
-        if (Tie())
-        {
-          this.ShowTable();
-          break;
-        }
+          if (Tie())
+          {
+            if(P1IsBot)this.ShowTable();
+            break;
+          }
 
           if (!P2IsBot) Console.WriteLine("Select a place to play");
 
@@ -210,6 +212,7 @@ namespace Game
 
       }
       Console.WriteLine("Thanks for playing!");
+      Console.Read();
     }
   }
 }
